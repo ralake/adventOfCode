@@ -2,7 +2,7 @@ export class FloorChecker {
   constructor(input) {
     this.floors = input.split('')
   }
-  findFloor(basement) {
+  findFloor() {
     var level = 0
     var index = 0
     this.floors.forEach((floor) => {
