@@ -1,7 +1,7 @@
 export function findFloor(input) {
-  var floors = input.split('')
-  var level = 0
-  var index = 0
+  let floors = input.split('')
+  let level = 0
+  let index = 0
   floors.forEach((floor) => {
     if (floor === '(') {
       level++
@@ -13,10 +13,10 @@ export function findFloor(input) {
 }
 
 export function basementIndex(input) {
-  var floors = input.split('')
-  var level = 0
-  var index = 0
-  for (var i = 0; i < floors.length; i++) {
+  let floors = input.split('')
+  let level = 0
+  let index = 0
+  for (let i = 0; i < floors.length; i++) {
     index++
     if (floors[i] === '(') {
       level++
