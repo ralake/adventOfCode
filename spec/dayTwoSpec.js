@@ -6,7 +6,7 @@ let instructions = fs.readFileSync('./inputs/dayTwo.txt', 'utf8', (err, data) =>
   return data
 })
 
-describe('getWrappingPaperArea', () => { 
+describe('getWrappingPaperArea', () => {
   it('can tell you the total area of wrapping paper required for all of your presents', () => {
     expect(getWrappingPaperArea(instructions)).toEqual(1606483)
   })

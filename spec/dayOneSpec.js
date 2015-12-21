@@ -6,7 +6,7 @@ let instructions = fs.readFileSync('./inputs/dayOne.txt', 'utf8', (err, data) =>
   return data
 })
 
-describe('findFloor', () => { 
+describe('findFloor', () => {
   it('can tell you which floor you are on given some instructions', () => {
     expect(findFloor(instructions)).toEqual(280)
   })

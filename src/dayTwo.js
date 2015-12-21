@@ -1,4 +1,4 @@
-export function getWrappingPaperArea(input) {
+export function getWrappingPaperArea (input) {
   let measurements = createMeasurementMap(input)
   let totalArea = 0
   measurements.forEach((set) => {
@@ -11,7 +11,7 @@ export function getWrappingPaperArea(input) {
       width * height,
       height * length
     ]
-    let smallestSide = Math.min.apply(Math, areaDimensions);
+    let smallestSide = Math.min.apply(Math, areaDimensions)
     areaDimensions.forEach((dimension) => {
       area += (dimension * 2)
     })
@@ -20,7 +20,7 @@ export function getWrappingPaperArea(input) {
   return totalArea
 }
 
-export function getRibbonLength(input) {
+export function getRibbonLength (input) {
   let measurements = createMeasurementMap(input)
   let totalLength = 0
   measurements.forEach((set) => {
@@ -40,8 +40,8 @@ export function getRibbonLength(input) {
   return totalLength
 }
 
-function createMeasurementMap(input) {
-  let measurements = [];
+function createMeasurementMap (input) {
+  let measurements = []
   let presents = input.split('\n')
   presents.forEach((present) => {
     let dimensions = present.split('x')
