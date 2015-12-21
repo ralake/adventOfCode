@@ -6,8 +6,12 @@
   "scripts": {
     "test": ""
   },
-  "standard" : {
-    "globals": ["describe", "it", "expect"]
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect"
+    ]
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +19,8 @@
     "jasmine": "^2.4.1",
     "jasmine-es6": "0.0.19",
     "standard": "^5.4.1"
+  },
+  "dependencies": {
+    "crypto": "0.0.3"
   }
 }
