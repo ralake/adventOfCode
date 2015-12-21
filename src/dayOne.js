@@ -1,31 +1,29 @@
-export class FloorChecker {
-  constructor(input) {
-    this.floors = input.split('')
-  }
-  findFloor() {
-    var level = 0
-    var index = 0
-    this.floors.forEach((floor) => {
-      if (floor === '(') {
-        level++
-      } else {
-        level--
-      }
-    })
-    return level
-  }
-  basementIndex() {
-    var level = 0
-    var index = 0
-    for (var i = 0; i < this.floors.length; i++) {
-      index++
-      if (this.floors[i] === '(') {
-        level++
-      } else {
-        level --
-        if (level === -1) break
-      }
+export function findFloor(input) {
+  var floors = input.split('')
+  var level = 0
+  var index = 0
+  floors.forEach((floor) => {
+    if (floor === '(') {
+      level++
+    } else {
+      level--
     }
-    return index
+  })
+  return level
+}
+
+export function basementIndex(input) {
+  var floors = input.split('')
+  var level = 0
+  var index = 0
+  for (var i = 0; i < floors.length; i++) {
+    index++
+    if (floors[i] === '(') {
+      level++
+    } else {
+      level --
+      if (level === -1) break
+    }
   }
+  return index
 }

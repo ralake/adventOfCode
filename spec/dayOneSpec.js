@@ -1,4 +1,4 @@
-import { FloorChecker } from '../src/dayOne.js'
+import { findFloor, basementIndex } from '../src/dayOne'
 
 var fs = require('fs')
 var instructions = fs.readFileSync('./inputs/dayOne.txt', 'utf8', (err, data) => {
@@ -6,14 +6,12 @@ var instructions = fs.readFileSync('./inputs/dayOne.txt', 'utf8', (err, data) =>
   return data
 })
 
-let floorChecker = new FloorChecker(instructions)
-
 describe('FloorChecker', () => { 
   it('knows which floor you are on given some instructions', () => {
-    expect(floorChecker.findFloor()).toEqual(280)
+    expect(findFloor(instructions)).toEqual(280)
   })
 
   it('can tell when you are in the basement', () => {
-    expect(floorChecker.basementIndex()).toEqual(1797)
+    expect(basementIndex(instructions)).toEqual(1797)
   })
 })
