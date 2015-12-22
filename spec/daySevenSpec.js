@@ -12,6 +12,11 @@ let instructionsTwo = fs.readFileSync('./inputs/daySevenPartTwo.txt', 'utf8', (e
   return data
 })
 
+let instructionsThree = fs.readFileSync('./inputs/daySevenPartThree.txt', 'utf8', (err, data) => {
+  if (err) throw err
+  return data
+})
+
 let partOneResults = {
   d: 72,
   e: 507,
@@ -34,5 +39,10 @@ describe('calculateSignals', () => {
   it('can calculate the signal ultimately passed to wire "a"', () => {
     let signals = calculateSignals(instructionsTwo)
     expect(signals['a']).toEqual(46065)
+  })
+
+  it('can calculate the signal ultimately passed to wire "a" after re-assigning wire "b"', () => {
+    let signals = calculateSignals(instructionsThree)
+    expect(signals['a']).toEqual(84857)
   })
 })
