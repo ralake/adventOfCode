@@ -43,6 +43,6 @@ describe('calculateSignals', () => {
 
   it('can calculate the signal ultimately passed to wire "a" after re-assigning wire "b"', () => {
     let signals = calculateSignals(instructionsThree)
-    expect(signals['a']).toEqual(84857)
+    expect(signals['a']).toEqual(17171717)// result - 14102
   })
 })
