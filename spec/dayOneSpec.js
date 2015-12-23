@@ -1,4 +1,4 @@
-import { findFloor, basementIndex } from '../src/dayOne'
+import { findFloor } from '../src/dayOne'
 
 let fs = require('fs')
 let instructions = fs.readFileSync('./inputs/dayOne.txt', 'utf8', (err, data) => {
@@ -10,10 +10,8 @@ describe('findFloor', () => {
   it('can tell you which floor you are on given some instructions', () => {
     expect(findFloor(instructions)).toEqual(280)
   })
-})
 
-describe('basementIndex', () => {
   it('can tell when instruction lands you in the basement', () => {
-    expect(basementIndex(instructions)).toEqual(1797)
+    expect(findFloor(instructions, true)).toEqual(1797)
   })
 })
