@@ -28,9 +28,7 @@ export function getRibbonLength (input) {
       set.get('length'),
       set.get('width'),
       set.get('height')
-    ].sort((a, b) => {
-      return a - b
-    })
+    ].sort((a, b) => { return a - b })
     let ribbonLength = (ribbonLengthDimensions[0] * 2) + (ribbonLengthDimensions[1] * 2)
     let bowLength = ribbonLengthDimensions.reduce((a, b) => {
       return a * b
