@@ -1,4 +1,4 @@
-export function findShotestDistance (input) {
+export function findDistance (input, shortestDistance) {
   let distances = input.split('\n')
   let destinations = getDestinations()
   let journeyCombinations = getJourneys(destinations)
@@ -57,5 +57,6 @@ export function findShotestDistance (input) {
     return permute(destinations)
   }
 
-  return getAllPossibleJourneyDistances().sort((a, b) => { return a - b }).shift()
+  if (shortestDistance) return Math.min.apply(Math, getAllPossibleJourneyDistances())
+  return Math.max.apply(Math, getAllPossibleJourneyDistances())
 }
