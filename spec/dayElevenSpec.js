@@ -8,4 +8,8 @@ describe('passwordGenerator', () => {
   it('can find the next legal password when givent he current password', () => {
     expect(passwordGenerator('cqjxjnds')).toEqual('cqjxxyzz')
   })
+
+  it('can find the next legal password when givent he current password', () => {
+    expect(passwordGenerator('cqjxxyzz')).toEqual('cqkaabcc')
+  })
 })
