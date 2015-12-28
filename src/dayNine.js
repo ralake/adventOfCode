@@ -1,7 +1,9 @@
+import { getAllPermutations } from './helpers'
+
 export function findDistance (input, shortestDistance) {
   let distances = input.split('\n')
   let destinations = getDestinations()
-  let journeyCombinations = getJourneys(destinations)
+  let journeyCombinations = getAllPermutations(destinations)
 
   function getAllPossibleJourneyDistances () {
     let combinationDistances = []
@@ -35,26 +37,6 @@ export function findDistance (input, shortestDistance) {
       if (destinations.indexOf(elements[2]) < 0) destinations.push(elements[2])
     })
     return destinations
-  }
-
-  function getJourneys (destinations) {
-    let results = []
-
-    function permute (destinations, memo) {
-      let currentDestination
-      memo = memo || []
-      for (let i = 0; i < destinations.length; i++) {
-        currentDestination = destinations.splice(i, 1)
-        if (!destinations.length) {
-          results.push(memo.concat(currentDestination))
-        }
-        permute(destinations.slice(), memo.concat(currentDestination))
-        destinations.splice(i, 0, currentDestination[0])
-      }
-      return results
-    }
-
-    return permute(destinations)
   }
 
   if (shortestDistance) return Math.min.apply(Math, getAllPossibleJourneyDistances())
