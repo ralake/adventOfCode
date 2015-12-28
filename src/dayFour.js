@@ -1,6 +1,5 @@
-let crypto = require('crypto')
-
 export function zeroHexDigestGenerator (secret, limit) {
+  let crypto = require('crypto')
   let counter = 0
   let valueToCheck = ''
   let md5 = crypto.createHash('md5').update(secret + counter).digest('hex')

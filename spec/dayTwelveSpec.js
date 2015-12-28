@@ -14,12 +14,41 @@ let testBookOne = JSON.stringify({
   }
 })
 
+let testBookTwo = JSON.stringify({
+  d: 'red',
+  e: [1, 2, 3, 4],
+  f: 5
+})
+
+let testBookThree = JSON.stringify([1, { c: 'red', b: 2 }, 3])
+let testBookFour = JSON.stringify([1, 'red', 5])
+
 describe('sumTheNumbersIn', () => {
-  it('sums all of the umbers in the first test book', () => {
-    expect(sumTheNumbersIn(testBookOne)).toEqual(12)
+  describe('standard version', () => {
+    it('sums all of the numbers in the first test book', () => {
+      expect(sumTheNumbersIn(testBookOne)).toEqual(12)
+    })
+
+    it('sums all of the numbers in the accounting book', () => {
+      expect(sumTheNumbersIn(accountingBook)).toEqual(119433)
+    })
   })
 
-  it('sums all of the numbers in the accounting book', () => {
-    expect(sumTheNumbersIn(accountingBook)).toEqual(119433)
+  describe('ignore red version', () => {
+    it('sums all of the numbers, ignoring any red values, in the second test book', () => {
+      expect(sumTheNumbersIn(testBookTwo, true)).toEqual(0)
+    })
+
+    it('sums all of the numbers, ignoring any red values, in the third test book', () => {
+      expect(sumTheNumbersIn(testBookThree, true)).toEqual(4)
+    })
+
+    it('sums all of the numbers, ignoring any red values, in the fourth test book', () => {
+      expect(sumTheNumbersIn(testBookFour, true)).toEqual(6)
+    })
+
+    it('sums all of the numbers, ignoring any red values, in the accounting book', () => {
+      expect(sumTheNumbersIn(accountingBook, true)).toEqual(68466)
+    })
   })
 })
