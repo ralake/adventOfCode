@@ -1,21 +1,9 @@
 import { findOptimalSeatingArrangement } from '../src/dayThirteen'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-
-let testGuestOpinions = fs.readFileSync('./inputs/dayThirteenTest.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
-
-let guestOpinionsOne = fs.readFileSync('./inputs/dayThirteenPartOne.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
-
-let guestOpinionsTwo = fs.readFileSync('./inputs/dayThirteenPartTwo.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let testGuestOpinions = readFromFile('./inputs/dayThirteenTest.txt')
+let guestOpinionsOne = readFromFile('./inputs/dayThirteenPartOne.txt')
+let guestOpinionsTwo = readFromFile('./inputs/dayThirteenPartTwo.txt')
 
 describe('findOptimalSeatingArrangement', () => {
   it('find the arrangement that brings about the most happiness amoungst the guests in the test case', () => {

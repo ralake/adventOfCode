@@ -1,10 +1,7 @@
 import { getNiceChildren } from '../src/dayFive'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let instructions = fs.readFileSync('./inputs/dayFive.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let instructions = readFromFile('./inputs/dayFive.txt')
 
 describe('getNiceChildren', () => {
   it('can count all of the nice children by one version', () => {

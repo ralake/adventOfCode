@@ -1,21 +1,9 @@
 import { calculateSignals } from '../src/daySeven'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-
-let testInstructions = fs.readFileSync('./inputs/daySevenTest.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
-
-let instructionsOne = fs.readFileSync('./inputs/daySevenPartOne.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
-
-let instructionsTwo = fs.readFileSync('./inputs/daySevenPartTwo.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let testInstructions = readFromFile('./inputs/daySevenTest.txt')
+let instructionsOne = readFromFile('./inputs/daySevenPartOne.txt')
+let instructionsTwo = readFromFile('./inputs/daySevenPartTwo.txt')
 
 let partOneResults = {
   d: 72,

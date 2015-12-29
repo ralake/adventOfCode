@@ -1,11 +1,8 @@
 import { setLights } from '../src/daySix'
+import { readFromFile } from '../src/helpers'
 
 const size = 1000
-let fs = require('fs')
-let instructions = fs.readFileSync('./inputs/daySix.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let instructions = readFromFile('./inputs/daySix.txt')
 
 describe('lightsModule', () => {
   it('can total the number of lights switched on given a set of instructions', () => {

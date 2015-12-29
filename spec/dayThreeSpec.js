@@ -1,10 +1,7 @@
 import { getSantaDeliveries, getRoboAndSantaDeliveries } from '../src/dayThree'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let instructions = fs.readFileSync('./inputs/dayThree.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let instructions = readFromFile('./inputs/dayThree.txt')
 
 describe('getSantaDeliveries', () => {
   it('tells you the total amount of houses with atleast one present delivered by santa', () => {

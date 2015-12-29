@@ -1,10 +1,7 @@
 import { getWrappingPaperArea, getRibbonLength } from '../src/dayTwo'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let instructions = fs.readFileSync('./inputs/dayTwo.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let instructions = readFromFile('./inputs/dayTwo.txt')
 
 describe('getWrappingPaperArea', () => {
   it('can tell you the total area of wrapping paper required for all of your presents', () => {

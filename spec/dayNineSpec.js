@@ -1,15 +1,8 @@
 import { findDistance } from '../src/dayNine'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let testInstructions = fs.readFileSync('./inputs/dayNineTest.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
-
-let instructions = fs.readFileSync('./inputs/dayNine.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let testInstructions = readFromFile('./inputs/dayNineTest.txt')
+let instructions = readFromFile('./inputs/dayNine.txt')
 
 describe('findDistance', () => {
   describe('shortest distance...', () => {

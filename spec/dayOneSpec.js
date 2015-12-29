@@ -1,10 +1,7 @@
 import { findFloor } from '../src/dayOne'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let instructions = fs.readFileSync('./inputs/dayOne.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return data
-})
+let instructions = readFromFile('./inputs/dayOne.txt')
 
 describe('findFloor', () => {
   it('can tell you which floor you are on given some instructions', () => {

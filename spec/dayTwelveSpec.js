@@ -1,10 +1,7 @@
 import { sumTheNumbersIn } from '../src/dayTwelve'
+import { readFromFile } from '../src/helpers'
 
-let fs = require('fs')
-let accountingBook = fs.readFileSync('./inputs/dayTwelve.txt', 'utf8', (err, data) => {
-  if (err) throw err
-  return '' + data
-})
+let accountingBook = readFromFile('./inputs/dayTwelve.txt')
 
 let testBookOne = JSON.stringify({
   a: [1, 2, 3],

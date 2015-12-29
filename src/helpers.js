@@ -17,3 +17,12 @@ export function getAllPermutations (selection) {
 
   return permute(selection)
 }
+
+export function readFromFile (input) {
+  let fs = require('fs')
+  let file = fs.readFileSync(input, 'utf8', (err, data) => {
+    if (err) throw err
+    return data
+  })
+  return file
+}
