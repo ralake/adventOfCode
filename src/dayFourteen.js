@@ -14,27 +14,37 @@ function getraceData (input, seconds) {
     let completeCycles = Math.floor(seconds / oneCycle)
     let remainingSeconds = seconds % oneCycle
     let secondsBreakdown = []
-    for (let cycle = 0; cycle < completeCycles; cycle++) {
-      for (let speedSecond = 0; speedSecond < durationAtSpeed; speedSecond++) {
-        secondsBreakdown.push(kmPerSecond)
-      }
-      for (let restSecond = 0; restSecond < durationAtRest; restSecond++) {
-        secondsBreakdown.push(0)
-      }
-    }
-    if (remainingSeconds && remainingSeconds <= durationAtSpeed) {
-      for (let remainingSecond = 0; remainingSecond < remainingSeconds; remainingSecond++) {
-        secondsBreakdown.push(kmPerSecond)
-      }
-    } else if (remainingSeconds && remainingSeconds > durationAtSpeed) {
-      let restSeconds = remainingSeconds - durationAtSpeed
-      for (let speedSecond = 0; speedSecond < durationAtSpeed; speedSecond++) {
-        secondsBreakdown.push(kmPerSecond)
-      }
-      for (let restSecond = 0; restSecond < restSeconds; restSecond++) {
-        secondsBreakdown.push(0)
+
+    function getFullCycleBreakdown () {
+      for (let cycle = 0; cycle < completeCycles; cycle++) {
+        for (let speedSecond = 0; speedSecond < durationAtSpeed; speedSecond++) {
+          secondsBreakdown.push(kmPerSecond)
+        }
+        for (let restSecond = 0; restSecond < durationAtRest; restSecond++) {
+          secondsBreakdown.push(0)
+        }
       }
     }
+
+    function getRemainingSecondsBreakdown () {
+      if (remainingSeconds && remainingSeconds <= durationAtSpeed) {
+        for (let remainingSecond = 0; remainingSecond < remainingSeconds; remainingSecond++) {
+          secondsBreakdown.push(kmPerSecond)
+        }
+      } else if (remainingSeconds && remainingSeconds > durationAtSpeed) {
+        let restSeconds = remainingSeconds - durationAtSpeed
+        for (let speedSecond = 0; speedSecond < durationAtSpeed; speedSecond++) {
+          secondsBreakdown.push(kmPerSecond)
+        }
+        for (let restSecond = 0; restSecond < restSeconds; restSecond++) {
+          secondsBreakdown.push(0)
+        }
+      }
+    }
+
+    getFullCycleBreakdown()
+    getRemainingSecondsBreakdown()
+
     raceData[index] = {
       secondsBreakdown: secondsBreakdown,
       distanceTravelled: 0,
