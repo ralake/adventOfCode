@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function getWrappingPaperArea (input) {
   let measurements = createMeasurementMap(input)
   let totalArea = 0
@@ -11,7 +13,7 @@ export function getWrappingPaperArea (input) {
       width * height,
       height * length
     ]
-    let smallestSide = Math.min.apply(Math, areaDimensions)
+    let smallestSide = _.min(areaDimensions)
     areaDimensions.forEach((dimension) => {
       area += (dimension * 2)
     })
@@ -24,31 +26,27 @@ export function getRibbonLength (input) {
   let measurements = createMeasurementMap(input)
   let totalLength = 0
   measurements.forEach((set) => {
-    let ribbonLengthDimensions = [
+    let ribbonLengthDimensions = _.sortBy([
       set.get('length'),
       set.get('width'),
       set.get('height')
-    ].sort((a, b) => { return a - b })
+    ], (dimension) => { return Math.min(dimension) })
     let ribbonLength = (ribbonLengthDimensions[0] * 2) + (ribbonLengthDimensions[1] * 2)
-    let bowLength = ribbonLengthDimensions.reduce((a, b) => {
-      return a * b
-    })
+    let bowLength = ribbonLengthDimensions.reduce((a, b) => { return a * b })
     totalLength += (ribbonLength + bowLength)
   })
   return totalLength
 }
 
 function createMeasurementMap (input) {
-  let measurements = []
   let presents = input.split('\n')
-  presents.forEach((present) => {
+  return _.map(presents, (present) => {
     let dimensions = present.split('x')
     let dimensionMap = new Map([
-      ['length', parseInt(dimensions[0], 10)],
+      ['length', parseInt(_.first(dimensions), 10)],
       ['width', parseInt(dimensions[1], 10)],
-      ['height', parseInt(dimensions[2], 10)]
+      ['height', parseInt(_.last(dimensions), 10)]
     ])
-    measurements.push(dimensionMap)
+    return dimensionMap
   })
-  return measurements
 }

@@ -2,11 +2,7 @@ export function getNiceChildren (input, version) {
   let niceChildren = 0
   let list = input.split('\n')
   let isNice = versions[version]
-  list.forEach((child) => {
-    if (isNice(child)) {
-      niceChildren++
-    }
-  })
+  list.forEach((child) => { if (isNice(child)) niceChildren++ })
   return niceChildren
 }
 

@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function lookAndSay (number, iterations) {
   let numberGroups = generateNewNumberGroup(number)
   for (let i = 0; i < iterations; i++) {
@@ -18,7 +20,7 @@ function generateNewNumber (numGroups) {
   let newNum = ''
   numGroups.forEach((group) => {
     let groupLength = group.length
-    let groupValue = group[0]
+    let groupValue = _.first(group)
     newNum += (groupLength + groupValue)
   })
   return newNum

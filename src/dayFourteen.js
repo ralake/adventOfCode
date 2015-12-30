@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function getResults (input, seconds) {
   return getDistanceAndPoints(input, seconds)
 }
@@ -59,30 +61,20 @@ function getDistanceAndPoints (input, seconds) {
   let distances = []
   let points = []
   for (let second = 0; second < seconds; second++) {
-    Object.keys(raceData).forEach((reindeer) => {
-      raceData[reindeer].distanceTravelled += raceData[reindeer].secondsBreakdown[second]
-    })
+    _.each(raceData, (data, reindeer) => { data.distanceTravelled += data.secondsBreakdown[second] })
     awardPoints(raceData)
   }
-  Object.keys(raceData).forEach((reindeer) => {
-    distances.push(raceData[reindeer].distanceTravelled)
-    points.push(raceData[reindeer].pointsWon)
+  _.each(raceData, (data, reindeer) => {
+    distances.push(data.distanceTravelled)
+    points.push(data.pointsWon)
   })
   return {
-    distanceTravelled: Math.max.apply(Math, distances),
-    pointsWon: Math.max.apply(Math, points)
+    distanceTravelled: _.max(distances),
+    pointsWon: _.max(points)
   }
 }
 
 function awardPoints (raceData) {
-  let currentDistances = []
-  Object.keys(raceData).forEach((reindeer) => {
-    currentDistances.push(raceData[reindeer].distanceTravelled)
-  })
-  let currentFurthestDistance = Math.max.apply(Math, currentDistances)
-  Object.keys(raceData).forEach((reindeer) => {
-    if (raceData[reindeer].distanceTravelled === currentFurthestDistance) {
-      raceData[reindeer].pointsWon += 1
-    }
-  })
+  let currentFurthestDistance = _.max(_.map(raceData, (data, reindeer) => { return data.distanceTravelled }))
+  _.each(raceData, (data, reindeer) => { if (data.distanceTravelled === currentFurthestDistance) data.pointsWon += 1 })
 }

@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function getSantaDeliveries (input) {
   let housesVisited = []
   let directions = input.split('')
@@ -30,7 +32,7 @@ function getVisitedHouses (directions, housesVisited) {
     if (direction === '>') x++
     if (direction === '<') x--
     let currentHouse = x + ', ' + y
-    if (housesVisited.indexOf(currentHouse) === -1) housesVisited.push(currentHouse)
+    if (!_.contains(housesVisited, currentHouse)) housesVisited.push(currentHouse)
   })
   return housesVisited.length
 }

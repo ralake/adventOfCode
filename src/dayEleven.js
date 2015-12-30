@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function passwordGenerator (currentPassword) {
   let alphabet = 'abcdefghjkmnpqrstuvwxyz'
   let newPassword = incrementPassword(currentPassword)
@@ -37,14 +39,14 @@ function containsIllegalLetters (password) {
 
 function hasTwoDifferentLetterPairs (password) {
   let passwordPairs = password.match(/(\w)\1/ig)
-  return (passwordPairs && passwordPairs.length === 2 && passwordPairs[0] !== passwordPairs[1])
+  return (passwordPairs && passwordPairs.length === 2 && _.first(passwordPairs) !== _.last(passwordPairs))
 }
 
 function hasRunOfThreeSequentialLetters (password, alphabet) {
   let letters = password.split('')
   let hasThreeSequentialLetters = false
   for (let i = 0; i < letters.length; i++) {
-    if (typeof letters[i + 3] !== 'undefined') {
+    if (!_.isUndefined(letters[i + 3])) {
       let groupOfThree = letters.slice(i, (i + 3)).join('')
       if (alphabet.indexOf(groupOfThree) >= 0) hasThreeSequentialLetters = true
     }

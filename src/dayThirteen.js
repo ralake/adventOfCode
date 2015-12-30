@@ -1,32 +1,30 @@
 import { getAllPermutations } from './helpers'
+let _ = require('underscore')
 
 export function findOptimalSeatingArrangement (input) {
   let guestOpinions = generateOpinionMap(input)
   let seatingArrangements = getAllPermutations(generateSeatingArrangement(input))
-  let allHappinessScores = []
-  seatingArrangements.forEach((arrangement, index) => {
-    let happinessScores = []
-    arrangement.forEach((guest, index) => {
+  let allHappinessScores = _.map(seatingArrangements, (arrangement, index) => {
+    let happinessScores = _.map(arrangement, (guest, index) => {
       let opinions = guestOpinions.get(guest)
       let neighbours = getNeighbours(arrangement, index)
-      happinessScores.push(opinions.get(neighbours.left))
-      happinessScores.push(opinions.get(neighbours.right))
+      return [opinions.get(neighbours.left), opinions.get(neighbours.right)]
     })
-    allHappinessScores.push(happinessScores.reduce((a, b) => { return a + b }))
+    return _.flatten(happinessScores).reduce((a, b) => { return a + b })
   })
-  return allHappinessScores.sort((a, b) => { return a - b })[allHappinessScores.length - 1]
+  return _.last(allHappinessScores.sort((a, b) => { return a - b }))
 }
 
 function getNeighbours (arrangement, index) {
   if (index === 0) {
     return {
-      left: arrangement[arrangement.length - 1],
+      left: _.last(arrangement),
       right: arrangement[index + 1]
     }
   } else if (index === arrangement.length - 1) {
     return {
       left: arrangement[index - 1],
-      right: arrangement[0]
+      right: _.first(arrangement)
     }
   } else {
     return {
@@ -41,8 +39,8 @@ function generateOpinionMap (input) {
   let opinions = input.split('\n')
   opinions.forEach((opinion) => {
     let opinionComponents = opinion.replace('.', '').split(' ')
-    let guest = opinionComponents[0]
-    let otherGuest = opinionComponents[opinionComponents.length - 1]
+    let guest = _.first(opinionComponents)
+    let otherGuest = _.last(opinionComponents)
     let loseHappiness = /lose/.test(opinionComponents[2])
     let happinessValue = parseInt(opinionComponents[3], 10)
     if (loseHappiness) happinessValue = -happinessValue
@@ -57,10 +55,8 @@ function generateSeatingArrangement (input) {
   let arrangement = []
   let opinions = input.split('\n')
   opinions.forEach((opinion) => {
-    let guest = opinion.split(' ')[0]
-    if (arrangement.indexOf(guest) < 0) {
-      arrangement.push(guest)
-    }
+    let guest = _.first(opinion.split(' '))
+    if (!_.contains(arrangement, guest)) arrangement.push(guest)
   })
   return arrangement
 }

@@ -23,6 +23,7 @@
     "standard": "^5.4.1"
   },
   "dependencies": {
-    "crypto": "0.0.3"
+    "crypto": "0.0.3",
+    "underscore": "^1.8.3"
   }
 }

@@ -1,3 +1,5 @@
+let _ = require('underscore')
+
 export function setLights (input, size) {
   let grid = buildGrid(size)
   let instructions = input.split('\n')
@@ -9,29 +11,26 @@ export function setLights (input, size) {
   return generateTotals()
 
   function buildGrid (size) {
-    let newGrid = []
-    for (let i = 0; i < size; i++) {
+    let grid = []
+    _(size).times(() => {
       let row = []
-      for (let j = 0; j < size; j++) {
-        let light = {
-          isOn: false,
-          brightness: 0
-        }
+      _(size).times(() => {
+        let light = { isOn: false, brightness: 0 }
         row.push(light)
-      }
-      newGrid.push(row)
-    }
-    return newGrid
+      })
+      grid.push(row)
+    })
+    return grid
   }
 
   function parseCoords (coords) {
-    let starts = coords[0].split(',')
-    let ends = coords[1].split(',')
+    let starts = _.first(coords).split(',')
+    let ends = _.last(coords).split(',')
     return {
-      startRow: parseInt(starts[1], 10),
-      startColumn: parseInt(starts[0], 10),
-      endRow: parseInt(ends[1], 10) + 1,
-      endColumn: parseInt(ends[0], 10) + 1
+      startRow: parseInt(_.last(starts), 10),
+      startColumn: parseInt(_.first(starts), 10),
+      endRow: parseInt(_.last(ends), 10) + 1,
+      endColumn: parseInt(_.first(ends), 10) + 1
     }
   }
 
@@ -73,8 +72,7 @@ export function setLights (input, size) {
       lightsOn: 0,
       brightness: 0
     }
-    let lights = Array.prototype.concat.apply([], grid)
-    lights.forEach((light) => {
+    _.flatten(grid).forEach((light) => {
       if (light.isOn) totals.lightsOn += 1
       totals.brightness += light.brightness
     })
