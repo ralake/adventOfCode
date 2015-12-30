@@ -1,12 +1,10 @@
-export function getFurthestDistance (input, seconds) {
-  let speedData = getSpeedData(input, seconds)
-  let distances = getDistancesTravelled(speedData, seconds)
-  return Math.max.apply(Math, distances)
+export function getResults (input, seconds) {
+  return getDistanceAndPoints(input, seconds)
 }
 
-function getSpeedData (input, seconds) {
+function getraceData (input, seconds) {
   let reindeers = input.split('\n')
-  let speedData = {}
+  let raceData = {}
   reindeers.forEach((reindeer, index) => {
     let data = reindeer.match(/\d+/g)
     let kmPerSecond = parseInt(data[0], 10)
@@ -37,23 +35,44 @@ function getSpeedData (input, seconds) {
         secondsBreakdown.push(0)
       }
     }
-    speedData[index] = {
+    raceData[index] = {
       secondsBreakdown: secondsBreakdown,
-      distanceTravelled: 0
+      distanceTravelled: 0,
+      pointsWon: 0
     }
   })
-  return speedData
+  return raceData
 }
 
-function getDistancesTravelled (speedData, seconds) {
+function getDistanceAndPoints (input, seconds) {
+  let raceData = getraceData(input, seconds)
   let distances = []
+  let points = []
   for (let second = 0; second < seconds; second++) {
-    Object.keys(speedData).forEach((reindeer) => {
-      speedData[reindeer].distanceTravelled += speedData[reindeer].secondsBreakdown[second]
+    Object.keys(raceData).forEach((reindeer) => {
+      raceData[reindeer].distanceTravelled += raceData[reindeer].secondsBreakdown[second]
     })
+    awardPoints(raceData)
   }
-  Object.keys(speedData).forEach((reindeer) => {
-    distances.push(speedData[reindeer].distanceTravelled)
+  Object.keys(raceData).forEach((reindeer) => {
+    distances.push(raceData[reindeer].distanceTravelled)
+    points.push(raceData[reindeer].pointsWon)
   })
-  return distances
+  return {
+    distanceTravelled: Math.max.apply(Math, distances),
+    pointsWon: Math.max.apply(Math, points)
+  }
+}
+
+function awardPoints (raceData) {
+  let currentDistances = []
+  Object.keys(raceData).forEach((reindeer) => {
+    currentDistances.push(raceData[reindeer].distanceTravelled)
+  })
+  let currentFurthestDistance = Math.max.apply(Math, currentDistances)
+  Object.keys(raceData).forEach((reindeer) => {
+    if (raceData[reindeer].distanceTravelled === currentFurthestDistance) {
+      raceData[reindeer].pointsWon += 1
+    }
+  })
 }
