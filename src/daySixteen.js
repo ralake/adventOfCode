@@ -28,7 +28,7 @@ function getAunties (list) {
   return _.map(list.split('\n'), (auntie) => {
     auntie = auntie.replace(/Sue\s\d+:\s/g, '')
     let properties = auntie.match(/\b\w+\D\b/g)
-    let values = _.map(auntie.match(/\b\d+\b/g), (number) => { return parseInt(number, 10) })
+    let values = _.map(auntie.match(/\b\d+\b/g), (number) => parseInt(number, 10))
     return _.object(properties, values)
   })
 }

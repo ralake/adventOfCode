@@ -75,6 +75,6 @@ function getDistanceAndPoints (input, seconds) {
 }
 
 function awardPoints (raceData) {
-  let currentFurthestDistance = _.max(_.map(raceData, (data, reindeer) => { return data.distanceTravelled }))
+  let currentFurthestDistance = _.max(_.map(raceData, (data, reindeer) => data.distanceTravelled))
   _.each(raceData, (data, reindeer) => { if (data.distanceTravelled === currentFurthestDistance) data.pointsWon += 1 })
 }

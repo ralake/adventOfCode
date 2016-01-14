@@ -10,9 +10,9 @@ export function findOptimalSeatingArrangement (input) {
       let neighbours = getNeighbours(arrangement, index)
       return [opinions.get(neighbours.left), opinions.get(neighbours.right)]
     })
-    return _.flatten(happinessScores).reduce((a, b) => { return a + b })
+    return _.flatten(happinessScores).reduce((a, b) => a + b)
   })
-  return _.last(allHappinessScores.sort((a, b) => { return a - b }))
+  return _.last(allHappinessScores.sort((a, b) => a - b ))
 }
 
 function getNeighbours (arrangement, index) {

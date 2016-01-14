@@ -47,7 +47,7 @@ export function calculateSignals (input) {
   }
 
   function someWiresDoNotHaveASignal () {
-    return _.some(wireSignals, (signal) => { return signal === false })
+    return _.some(wireSignals, (signal) => !!signal)
   }
 
   mapWiresAndInstructions(input)

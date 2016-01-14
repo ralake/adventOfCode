@@ -32,7 +32,7 @@ export function getRibbonLength (input) {
       set.get('height')
     ], (dimension) => { return Math.min(dimension) })
     let ribbonLength = (ribbonLengthDimensions[0] * 2) + (ribbonLengthDimensions[1] * 2)
-    let bowLength = ribbonLengthDimensions.reduce((a, b) => { return a * b })
+    let bowLength = ribbonLengthDimensions.reduce((a, b) => a * b)
     totalLength += (ribbonLength + bowLength)
   })
   return totalLength
